@@ -25,7 +25,7 @@ function LoginFormLeftSide() {
         .catch(function (res) {
           console.log(res);
         });
-        console.log(values);
+      console.log(values);
     },
   });
 
