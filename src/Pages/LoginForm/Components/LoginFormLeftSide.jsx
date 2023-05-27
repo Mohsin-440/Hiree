@@ -1,15 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import HireeLogo from "/assets/logo.svg";
-// import { useFormik } from "formik";
+import { useFormik } from "formik";
+import { loginFormSchema } from "../schemas/LoginFormSchema";
+import axios from "axios";
 
 const initialValues = { email: "", password: "" };
 
 function LoginFormLeftSide() {
-  // const {values,errors,handleBlur,handleChange,handleSubmit} = useFormik({
-  //   initialValues: initialValues,
-  //   onSubmit: 
-  // });
+  const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
+    initialValues: initialValues,
+    validationSchema: loginFormSchema,
+    onSubmit: (values) => {
+      const userData = {
+        email: values.email,
+        password: values.password,
+      };
+      axios
+        .post("http://localhost:4000/api/login", userData)
+        .then(function (res) {
+          console.log(res);
+          alert("Successfully signed up!");
+        })
+        .catch(function (res) {
+          console.log(res);
+        });
+        console.log(values);
+    },
+  });
+
+  console.log(errors);
   return (
     <>
       <div className="flex flex-col items-center w-full min-h-[calc(100vh_-_60px)] bg-gray pb-8 pt-5 xs:pt-8 sm:pt-28 lg:rounded-l-[37px] lg:w-1/2 lg:p-12">
@@ -22,7 +42,10 @@ function LoginFormLeftSide() {
           </p>
         </div>
 
-        <form className="w-[calc(100%_-_40px)] flex flex-col items-center mt-7 max-w-[400px]">
+        <form
+          onSubmit={handleSubmit}
+          className="w-[calc(100%_-_40px)] flex flex-col items-center mt-7 max-w-[400px]"
+        >
           <div className="flex flex-col w-full gap-2 mb-2 sm:mb-10">
             <label htmlFor="email" className="xs:text-[18px] sm:text-[20px]">
               Email
@@ -30,6 +53,8 @@ function LoginFormLeftSide() {
             <input
               type="text"
               id="email"
+              onChange={handleChange}
+              value={values.email}
               className="drop-shadow-2xl text-[16px] sm:text-[18px] px-2 py-2 rounded-[4px]"
               placeholder="abc@gmail.com"
             />
@@ -42,6 +67,8 @@ function LoginFormLeftSide() {
             <input
               type="password"
               id="password"
+              onChange={handleChange}
+              value={values.password}
               className="drop-shadow-2xl text-[16px]  sm:text-[18px] px-2 py-2 rounded-[4px]"
               placeholder="********"
             />
