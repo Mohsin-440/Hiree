@@ -40,5 +40,5 @@
   @apply bg-white;
 }
 .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
-  @apply h-auto text-[16px] px-2 py-2;
+  @apply h-auto text-[16px] px-2 py-6;
 }
