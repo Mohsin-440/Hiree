@@ -1,3 +1,4 @@
 input {
   @apply border-[#ff000000] border outline-none focus:border-black;
 }
+
