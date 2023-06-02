@@ -134,7 +134,7 @@ function SignupForm() {
 
       <button
         type="submit"
-        className="w-full min-w-[200px] bg-blue font-semibold text-white rounded-full text-[16px] sm:text-[17px] py-2 sm:py-3 mt-7 justify-center flex mx-auto sm:mt-9 xl:text-lg hover:bg-transparent hover:text-blue hover:border-2 hover:border-blue hover:shadow-lg hover:-translate-y-1 hover:translate-x-[2px] transition-transform active:translate-y-1 active:-translate-x-[2px]"
+        className="w-full min-w-[200px] bg-blue font-semibold text-white rounded-full text-[16px] sm:text-[17px] py-2 sm:py-3 mt-7 justify-center flex mx-auto sm:mt-9 xl:text-lg hover:bg-transparent hover:text-blue border-2 hover:border-blue hover:shadow-lg hover:-translate-y-1 hover:translate-x-[2px] transition-transform active:translate-y-1 active:-translate-x-[2px]"
       >
         Sign up
       </button>

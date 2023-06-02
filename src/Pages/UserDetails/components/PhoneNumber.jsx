@@ -1,4 +1,3 @@
-import React from "react";
 
 const PhoneNumber = ({
   countryCodeRestProps,
@@ -6,8 +5,8 @@ const PhoneNumber = ({
   errors,
 }) => {
   return (
-    <div className="flex gap-0.5 justify-between flex-col">
-      <div className="flex gap-2 justify-between">
+    <div className="flex gap-0.5 justify-between flex-col w-full">
+      <div className="flex gap-2 justify-between overflow-x-hidden">
         <div className="flex flex-col w-[18%] gap-2 mb-2 sm:mb-4 ">
           <div className="flex justify-between items-center">
             <label
@@ -17,7 +16,8 @@ const PhoneNumber = ({
               Code
             </label>
           </div>
-          <select className="flex-grow" {...countryCodeRestProps}>
+          <select className="flex-grow bg-white text-[16px] sm:text-[18px] px-2 py-2  border-[#707070] border-[0.5px] rounded-[4px] md:rounded-lg"
+            {...countryCodeRestProps}>
             <option value="" disabled>
               Select...
             </option>
@@ -39,7 +39,7 @@ const PhoneNumber = ({
             {...phoneNumberRestProps}
             type="text"
             id="phoneNumber"
-            className="drop-shadow-2xl text-[16px] sm:text-[18px] px-2 py-2 rounded-[4px]"
+            className="text-[16px] sm:text-[18px] px-2 py-2 border-[#707070] border-[0.5px] rounded-[4px] md:rounded-lg outline-none"
           />
         </div>
       </div>
@@ -47,7 +47,7 @@ const PhoneNumber = ({
         {errors.phoneNumber?.message
           ? errors.phoneNumber?.message
           : errors.countryCode?.message}
-        
+
       </p>
     </div>
   );

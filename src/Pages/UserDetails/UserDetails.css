@@ -1,9 +1,9 @@
+
 .main_container {
-  @apply w-full bg-gray flex flex-col min-w-[300px] pt-3 pb-7 px-3 gap-3;
-  border: 1px solid #4164e3;
+  @apply w-full lg:w-1/2 flex flex-col min-w-[300px] pt-3 pb-7 px-3 gap-3 items-end;
 }
 .formHeading {
-  @apply text-[22px] text-blue font-semibold w-fit pr-1;
+  @apply text-[22px] sm:text-[24px] md:text-[26px] lg:text-[30px] xl:text-[36px] 2xl:text-[40px] text-blue font-semibold w-fit lg:w-11/12 pr-1;
   border-bottom: 1px solid #4164e3;
 }
 
@@ -27,12 +27,16 @@
 .name-input-containers > p {
   @apply text-[red] text-[13px] self-end;
 }
-.input-container > input {
-  @apply drop-shadow-2xl text-[16px] sm:text-[18px] px-2 py-2 rounded-[4px];
+
+.input-container > input,
+.name-input-containers > input {
+  @apply text-[16px] sm:text-[18px] px-2 py-2 border-[#707070] border-[0.5px] rounded-[4px] md:rounded-lg outline-none;
 }
-.input-container > select {
-  @apply drop-shadow-2xl text-[16px] sm:text-[18px] px-2 py-2 rounded-[4px];
+.input-container > select,
+.name-input-containers > select {
+  @apply text-[16px] sm:text-[18px] px-2 py-2 bg-white  border-[#707070] border-[0.5px] rounded-[4px] md:rounded-lg outline-none;
 }
+
 .MuiStack-root {
   @apply w-full;
 }
