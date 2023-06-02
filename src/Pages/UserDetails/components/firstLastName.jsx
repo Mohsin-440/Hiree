@@ -12,7 +12,7 @@ const FirstLastName = ({ firstNameRestProps, lastNameRestProps, errors }) => {
           {...firstNameRestProps}
           type="text"
           id="firstName"
-          className="text-[16px] sm:text-[18px] px-2 py-2 rounded-[4px]"
+          className="text-[16px] sm:text-[18px] px-2 py-2 rounded-[4px] focus:border-blue "
         />
         <p className="text-[red] text-[13px] self-end">
           {errors?.firstName?.message}
@@ -27,7 +27,7 @@ const FirstLastName = ({ firstNameRestProps, lastNameRestProps, errors }) => {
           {...lastNameRestProps}
           type="text"
           id="lastName"
-          className="text-[16px] sm:text-[18px] px-2 py-2 rounded-[4px]"
+          className="text-[16px] sm:text-[18px] px-2 py-2 rounded-[4px] focus:border-blue"
         />
         <p className="text-[red] text-[13px]">{errors.lastName?.message}</p>
       </div>

@@ -1,4 +1,3 @@
-
 .main_container {
   @apply w-full lg:w-1/2 flex flex-col min-w-[300px] pt-3 pb-7 px-3 gap-3 items-end;
 }
@@ -30,11 +29,12 @@
 
 .input-container > input,
 .name-input-containers > input {
-  @apply text-[16px] sm:text-[18px] px-2 py-2 border-[#707070] border-[0.5px] rounded-[4px] md:rounded-lg outline-none;
+  @apply text-[16px] sm:text-[18px] px-2 py-2 border-[#707070] border-[0.5px] rounded-[4px] md:rounded-lg outline-none focus:border-blue;
 }
+
 .input-container > select,
 .name-input-containers > select {
-  @apply text-[16px] sm:text-[18px] px-2 py-2 bg-white  border-[#707070] border-[0.5px] rounded-[4px] md:rounded-lg outline-none;
+  @apply text-[16px] sm:text-[18px] px-2 py-2 bg-white border-[#707070] border-[0.5px] rounded-[4px] md:rounded-lg outline-none focus:border-blue;
 }
 
 .MuiStack-root {

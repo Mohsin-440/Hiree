@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { schema } from "../schema/schema";
 import axios from "axios";
 import { UserInfoContext } from "../../../constants/providers";
+import { setLocalStorage } from "../../../helpers/localStorage/localStorage";
 
 const initialValues = { email: "", password: "", confirmPassword: "" };
 
@@ -25,7 +26,7 @@ function SignupFormLeftSide() {
 
         <div className="flex flex-col items-center justify-between w-full gap-6 xs:gap-10 mt-7 xs:mt-16 max-w-[400px]">
           <span className="text-[12px] xs:text-[14px] sm:text-[16px]">
-            Don't have an account yet?{" "}
+            Don&apos;t have an account yet?{" "}
             <Link to="/signup" className="text-blue no-underline">
               Join Hiree
             </Link>
@@ -41,7 +42,7 @@ function SignupForm() {
   const navigate = useNavigate();
   const [success, setSucceess] = useState();
   const [, setUserInfo] = useContext(UserInfoContext);
-  
+
   const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
     validationSchema: schema,
@@ -50,8 +51,9 @@ function SignupForm() {
 
   function submitForm(values) {
     axios
-      .post("http://localhost:4000/api/signup", values)
+      .post("http://localhost:4000/api/signup", values, { withCredentials: true })
       .then(function (res) {
+        setLocalStorage("userInfo", res.data);
         setServerErr({ email: undefined });
         setUserInfo(res.data);
         setSucceess(true);
@@ -59,15 +61,15 @@ function SignupForm() {
       .catch(function (res) {
         setSucceess(false);
         if (res?.response?.status !== 500) {
-          setServerErr({ ...res?.response?.data?.Error });
+          setServerErr({ ...res?.response?.data });
         }
       });
   }
   useEffect(() => {
-    if (success) {
-      navigate("/user/details")
-    }
+    if (success)
+      navigate("/");
   }, [success, navigate]);
+
   return (
     <form
       onSubmit={handleSubmit}

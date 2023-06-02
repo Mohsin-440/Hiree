@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import Layout from "../../layouts/layout";
-import DatePicker from "../../components/datePicker";
+// import DatePicker from "../../components/datePicker";
 import { useForm } from "react-hook-form";
 import FirstLastName from "./components/firstLastName";
 import PhoneNumber from "./components/PhoneNumber";
@@ -14,19 +14,22 @@ import {
   genderValidations,
   roleValidations,
   phoneNumberValidations,
-  DOBValidations,
+  // DOBValidations,
 } from "./Validations";
 import { UserInfoContext } from "../../constants/providers";
 import LeftImageDivide from "./components/LeftImageDivide";
+import { getLocalStorage, setLocalStorage } from "../../helpers/localStorage/localStorage";
+import { useNavigate } from "react-router-dom";
+import useCheckLocalStorage from "../../helpers/hooks/useCheckLocalStorage";
 const UserDetails = () => {
   const [userInfo] = useContext(UserInfoContext);
-
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
-    control,
+    // control,
   } = useForm({
     defaultValues: {
       firstName: "",
@@ -35,17 +38,18 @@ const UserDetails = () => {
       phoneNumber: "",
       gender: "",
       role: "",
-      DOB: "",
+      // DOB: "",
     },
   });
 
   const [success, setSuccess] = useState();
   const onSubmitHandler = (data) => {
     data.userId = userInfo?.userId;
-
+    data.DOB = "Mon May 28 2001 00:00:00 GMT+0500 (Pakistan Standard Time)"
     axiosInstance
       .post("/api/add/userinfo", data)
-      .then((response) => {
+      .then((res) => {
+        setLocalStorage("userInfo", res.data)
         setSuccess(true);
       })
       .catch((error) => {
@@ -58,14 +62,24 @@ const UserDetails = () => {
   };
 
   useEffect(() => {
-    console.log("success");
-  }, [success]);
+    if (success)
+      navigate("/")
+  }, [success, navigate]);
+
+  useEffect(() => {
+    if (getLocalStorage("userInfo")?.firstName)
+      navigate("/")
+    else if (!getLocalStorage("userInfo"))
+      navigate("/login")
+  }, [navigate])
+  useCheckLocalStorage();
+
   return (
     <Layout>
       <div className="flex bg-gray lg:bg-white flex-col gap-3 items-start lg:items-center  w-full">
         <h2 className="formHeading">Enter Your Details</h2>
 
-        <div  className="flex items-center md:px-3 max-w-[1920px] w-full" >
+        <div className="flex items-center md:px-3 max-w-[1920px] w-full" >
           <LeftImageDivide />
 
           <div className="main_container">
@@ -126,7 +140,7 @@ const UserDetails = () => {
               <div className="input-container">
                 <label htmlFor="DOB">Date of Birth</label>
 
-                <DatePicker control={control} rules={DOBValidations} />
+                {/* <DatePicker control={control} rules={DOBValidations} /> */}
                 <p className="text-[red] text-[13px] self-end">
                   {errors.DOB?.message}
                 </p>

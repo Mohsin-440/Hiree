@@ -3,13 +3,13 @@ import imgHirig from "../../../assets/hiring.png";
 import imgWork from "../../../assets/work.png";
 const Images = [imgHirig, imgWork];
 
-function RightSide({}) {
+function RightSide() {
   const [position, setPosition] = useState(0);
 
   useEffect(() => {
     setInterval(() => {
       if (position === 0) setPosition(-100);
-      else  if (position === -100)  setPosition(0);
+      else if (position === -100) setPosition(0);
     }, 6000);
   }, [position]);
 
@@ -35,15 +35,13 @@ function RightSide({}) {
 
         <div className="flex gap-2">
           <span
-            className={`p-1 flex w-fit rounded-full bg-white cursor-pointer shadow-sm ${
-              position === 0 ? "bg-white" : "bg-[white]/60"
-            }`}
+            className={`p-1 flex w-fit rounded-full bg-white cursor-pointer shadow-sm ${position === 0 ? "bg-white" : "bg-[white]/60"
+              }`}
             onClick={() => setPosition(0)}
           ></span>
           <span
-            className={`p-1 flex w-fit rounded-full cursor-pointer shadow-sm ${
-              position === -100 ? "bg-white" : "bg-[white]/60"
-            }`}
+            className={`p-1 flex w-fit rounded-full cursor-pointer shadow-sm ${position === -100 ? "bg-white" : "bg-[white]/60"
+              }`}
             onClick={() => setPosition(-100)}
           ></span>
         </div>

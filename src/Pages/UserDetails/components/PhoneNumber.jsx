@@ -16,7 +16,7 @@ const PhoneNumber = ({
               Code
             </label>
           </div>
-          <select className="flex-grow bg-white text-[16px] sm:text-[18px] px-2 py-2  border-[#707070] border-[0.5px] rounded-[4px] md:rounded-lg"
+          <select className="flex-grow bg-white text-[16px] sm:text-[18px] px-2 py-2  border-[#707070] border-[0.5px] rounded-[4px] md:rounded-lg focus:border-blue active:border-blue outline-none"
             {...countryCodeRestProps}>
             <option value="" disabled>
               Select...
@@ -39,7 +39,7 @@ const PhoneNumber = ({
             {...phoneNumberRestProps}
             type="text"
             id="phoneNumber"
-            className="text-[16px] sm:text-[18px] px-2 py-2 border-[#707070] border-[0.5px] rounded-[4px] md:rounded-lg outline-none"
+            className="text-[16px] sm:text-[18px] px-2 py-2 border-[#707070] border-[0.5px] rounded-[4px] md:rounded-lg outline-none  focus:border-blue"
           />
         </div>
       </div>

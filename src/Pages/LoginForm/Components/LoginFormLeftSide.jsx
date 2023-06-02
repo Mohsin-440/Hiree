@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import HireeLogo from "../../../assets/logo.svg";
 import { useFormik } from "formik";
 import { loginFormSchema } from "../schemas/LoginFormSchema";
 import axios from "axios";
 import { UserInfoContext } from "../../../constants/providers";
+import { setLocalStorage } from "../../../helpers/localStorage/localStorage";
 
 const initialValues = { email: "", password: "" };
 
@@ -34,7 +35,7 @@ function LoginFormLeftSide() {
           </div>
 
           <span className="text-[12px] xs:text-[14px] sm:text-[16px]">
-            Don't have an account yet?{" "}
+            Don&apos;t have an account yet?{" "}
             <Link to="/signup" className="text-blue no-underline">
               Join Hiree
             </Link>
@@ -47,6 +48,8 @@ function LoginFormLeftSide() {
 
 function LoginForm() {
   const [, setUserInfo] = useContext(UserInfoContext);
+  const navigate = useNavigate()
+  const [success, setSucceess] = useState()
   const [errs, setErrs] = useState({});
   const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
@@ -56,18 +59,26 @@ function LoginForm() {
 
   function submitForm(values) {
     axios
-      .post("http://localhost:4000/api/login", values)
+      .post("http://localhost:4000/api/login", values, { withCredentials: true })
       .then(function (res) {
+        setLocalStorage("userInfo", res.data);
+
         setUserInfo(res?.data);
         setErrs({ Invalid: undefined });
-        alert("Successfully signed up!");
+        setSucceess(true)
       })
       .catch(function (res) {
+        setSucceess(false)
         if (res?.response?.status !== 500) {
           setErrs({ Invalid: res?.response?.data?.message });
         }
       });
   }
+
+  useEffect(() => {
+    if (success)
+      navigate("/")
+  }, [success, navigate])
 
   return (
     <form
